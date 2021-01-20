@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
+[RequireComponent(typeof(Rigidbody))]
 
 public class UFO : MonoBehaviour
 {
@@ -10,17 +12,20 @@ public class UFO : MonoBehaviour
 
 
     [SerializeField] private float rotSpeed = 100f;
-    [SerializeField] float flySpeed = 10f;
-    [SerializeField] Text energyText;
-    [SerializeField] ParticleSystem jetParticle;
-    [SerializeField] GameObject boomParticle;
+    [SerializeField] private float flySpeed = 10f;
+    [SerializeField] private Text energyText;
+    [SerializeField] private ParticleSystem jetParticle;
+    [SerializeField] private GameObject boomParticle;
+    
 
-    [SerializeField] int EnergyTotal = 200;
-    [SerializeField] int EnergyApply = 20;
-    [SerializeField] int EnergyPlus = 40;
+    [SerializeField] private int EnergyTotal = 200;
+    [SerializeField] private int EnergyApply = 20;
+    [SerializeField] private int EnergyPlus = 40;
+
 
     public List<GameObject> portalsParticle = new List<GameObject>();
     public GameObject portal;
+    public event UnityAction<int> EnergyCollected;
 
     private float yRange = 49.5f;
     private float xRange = 58.0f;
@@ -41,8 +46,6 @@ public class UFO : MonoBehaviour
         DebugKeys();
         RangePosition();
     }
-
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -76,11 +79,11 @@ public class UFO : MonoBehaviour
         }
     }
         
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Battery"))
         {
+
             AddEnergy(EnergyPlus, other.gameObject);
             //SoundManager.Instance.PlaySound(SoundManager.Instance.addBonusSound);
 
@@ -105,6 +108,7 @@ public class UFO : MonoBehaviour
             rigidBody.AddRelativeForce(Vector3.up * flySpeed * Time.deltaTime);
             Energy();
             jetParticle.Play();
+            EnergyCollected?.Invoke(EnergyTotal);
             //SoundManager.Instance.PlaySound(SoundManager.Instance.flySound);
         }
         else
@@ -139,15 +143,11 @@ public class UFO : MonoBehaviour
         isActive = false;
         //SoundManager.Instance.PlaySound(SoundManager.Instance.boomSound);
 
-
-
     }
-
 
     private void Energy()
     {
         EnergyTotal -= Mathf.RoundToInt(EnergyApply * Time.deltaTime);
-        energyText.text = "Energy: " + EnergyTotal.ToString();
     }
 
     void AddEnergy(int energyToAdd, GameObject batteryObj)
@@ -156,7 +156,6 @@ public class UFO : MonoBehaviour
         EnergyTotal += energyToAdd;
         Destroy(batteryObj);
     }
-
 
     void DebugKeys()
     {
@@ -181,6 +180,7 @@ public class UFO : MonoBehaviour
         {
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
+
         if (transform.position.x < -xRange)
         {
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);

@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 299859857}
   - component: {fileID: 299859859}
   - component: {fileID: 299859858}
+  - component: {fileID: 299859860}
   m_Layer: 5
   m_Name: EnergyText
   m_TagString: Untagged
@@ -804,8 +805,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 33}
-  m_SizeDelta: {x: 200, y: 80}
+  m_AnchoredPosition: {x: -470, y: 280}
+  m_SizeDelta: {x: 450, y: 140}
   m_Pivot: {x: 0.49999994, y: 0.5000001}
 --- !u!114 &299859858
 MonoBehaviour:
@@ -829,18 +830,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 58b647c5b2ec4184e9a07a561cdf0644, type: 3}
-    m_FontSize: 55
+    m_FontSize: 120
     m_FontStyle: 3
-    m_BestFit: 1
-    m_MinSize: 20
-    m_MaxSize: 84
+    m_BestFit: 0
+    m_MinSize: 12
+    m_MaxSize: 147
     m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Energy: 150'
+  m_Text: 'Energy: '
 --- !u!222 &299859859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -849,6 +850,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299859856}
   m_CullTransparentMesh: 0
+--- !u!114 &299859860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299859856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd72e85285be648b69ba26b84b9075d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1942583793}
+  energyText: {fileID: 299859858}
 --- !u!1 &313046025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,7 +2025,6 @@ GameObject:
   - component: {fileID: 990457073}
   - component: {fileID: 990457072}
   - component: {fileID: 990457071}
-  - component: {fileID: 990457070}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2018,18 +2032,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &990457070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990457069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55f386835fe3d4a279f3f2eb59a30b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &990457071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,6 +3946,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1518652822}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1942583793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2629930174200550788, guid: 4be3e3294d6da41e19a24f3f6425d380,
+    type: 3}
+  m_PrefabInstance: {fileID: 1660288217597966282}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acac400f78a8c4eb8b3a76734b9a04ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1995521798
 PrefabInstance:
   m_ObjectHideFlags: 0

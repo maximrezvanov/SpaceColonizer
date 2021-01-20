@@ -1,15 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
-//[System.Serializable] public class EventGameState: UnityEvent<GameManager.GameState, GameManager.GameState>
-//{
-
-//}
 
 public class GameManager : MonoBehaviour
 {
@@ -39,9 +32,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-
-    //public EventGameState OnGameStateChanged;
-
     public enum GameState
     {
         Running,
@@ -66,15 +56,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //EventManager.Instance.AddListener(EVENT_TYPE.NEXT_LEVEL, this);
-        //EventManager.Instance.AddListener(EVENT_TYPE.DEAD, this);
-
-
+     
     }
 
-    public void LoadFirstLevel()//lose
+    public void LoadFirstLevel()
     {
-        
         Debug.Log("LoadFirstLevel");
         SceneManager.LoadScene(1);
     }
@@ -92,8 +78,6 @@ public class GameManager : MonoBehaviour
     {
         GameState previousGameState = _currentGameState;
         _currentGameState = state;
-
-        //OnGameStateChanged.Invoke(_currentGameState, previousGameState);
 
         switch (_currentGameState)
         {
@@ -124,20 +108,5 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //public void OnEvent(EVENT_TYPE Event_Type)
-    //{
-    //    switch (Event_Type)
-    //    {
-    //        case EVENT_TYPE.NEXT_LEVEL:
-    //            LoadNextLevel();
-    //            break;
-
-    //        case EVENT_TYPE.DEAD:
-    //            Debug.Log("dead");
-    //            _currentGameState = GameState.GameOver;
-
-    //            break;
-    //    }
-
-    //}
+    
 }
