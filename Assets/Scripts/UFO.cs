@@ -13,14 +13,13 @@ public class UFO : MonoBehaviour
 
     [SerializeField] private float rotSpeed = 100f;
     [SerializeField] private float flySpeed = 10f;
-    [SerializeField] private Text energyText;
     [SerializeField] private ParticleSystem jetParticle;
     [SerializeField] private GameObject boomParticle;
     
 
-    [SerializeField] private int EnergyTotal = 200;
-    [SerializeField] private int EnergyApply = 20;
-    [SerializeField] private int EnergyPlus = 40;
+    [SerializeField] private int energyTotal = 200;
+    [SerializeField] private int energyApply = 20;
+    [SerializeField] private int energyPlus = 40;
 
 
     public List<GameObject> portalsParticle = new List<GameObject>();
@@ -84,7 +83,7 @@ public class UFO : MonoBehaviour
         if (other.gameObject.CompareTag("Battery"))
         {
 
-            AddEnergy(EnergyPlus, other.gameObject);
+            AddEnergy(energyPlus, other.gameObject);
             //SoundManager.Instance.PlaySound(SoundManager.Instance.addBonusSound);
 
         }
@@ -103,13 +102,13 @@ public class UFO : MonoBehaviour
 
     void Launch()
     {
-        if (Input.GetKey(KeyCode.Space) && EnergyTotal > 0 && isActive)
+        if (Input.GetKey(KeyCode.Space) && energyTotal > 0 && isActive)
         {
             rigidBody.AddRelativeForce(Vector3.up * flySpeed * Time.deltaTime);
-            Energy();
+            GetEnergy();
             jetParticle.Play();
-            EnergyCollected?.Invoke(EnergyTotal);
-            //SoundManager.Instance.PlaySound(SoundManager.Instance.flySound);
+            EnergyCollected?.Invoke(energyTotal);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.flySound);
         }
         else
         {
@@ -145,15 +144,15 @@ public class UFO : MonoBehaviour
 
     }
 
-    private void Energy()
+    private void GetEnergy()
     {
-        EnergyTotal -= Mathf.RoundToInt(EnergyApply * Time.deltaTime);
+        energyTotal -= Mathf.RoundToInt(energyApply * Time.deltaTime);
     }
 
     void AddEnergy(int energyToAdd, GameObject batteryObj)
     {
         batteryObj.GetComponent<BoxCollider>().enabled = false;
-        EnergyTotal += energyToAdd;
+        energyTotal += energyToAdd;
         Destroy(batteryObj);
     }
 

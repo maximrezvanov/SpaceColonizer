@@ -8,8 +8,11 @@ public class MenuControl : MonoBehaviour
 
    public GameObject settingsMenu;
    public GameObject mainButtons;
-   
 
+    private void Awake()
+    {
+        GameObject setMenu = GameObject.Find("SettingsMenuPanel");
+    }
 
 
     public void StartGame()
@@ -17,18 +20,7 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void OpenSettings()
-    {
-        mainButtons.SetActive(false);
-        settingsMenu.SetActive(true);
-    }
 
-    public void CloseSettings()
-    {
-        settingsMenu.SetActive(false);
-        mainButtons.SetActive(true);
-
-    }
 
     public void ExitGame()
     {
